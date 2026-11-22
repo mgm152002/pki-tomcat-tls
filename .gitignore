@@ -1,0 +1,11 @@
+# Generated PKI material: private keys, CA databases, keystores. Never commit these.
+/ca/
+/certs/
+/crl/
+*.key
+*.p12
+*.jks
+*.pfx
+# Tomcat download and install
+downloads/
+apache-tomcat-*/
