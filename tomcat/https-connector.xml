@@ -1,0 +1,13 @@
+    <!-- HTTPS connector (PKI assignment)
+         TLS 1.2/1.3 on port 8443 using the server certificate issued by the Simple Signing CA.
+         The PKCS#12 keystore holds the private key, the server cert and the CA chain. -->
+    <Connector port="8443" protocol="org.apache.coyote.http11.Http11NioProtocol"
+               maxThreads="150" SSLEnabled="true" scheme="https" secure="true">
+        <SSLHostConfig protocols="TLSv1.2+TLSv1.3">
+            <Certificate certificateKeystoreFile="conf/localhost.p12"
+                         certificateKeystoreType="PKCS12"
+                         certificateKeystorePassword="${KEYSTORE_PASS}"
+                         certificateKeyAlias="tomcat"
+                         type="RSA" />
+        </SSLHostConfig>
+    </Connector>

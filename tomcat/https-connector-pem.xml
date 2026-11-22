@@ -1,0 +1,10 @@
+    <!-- Alternative: the same connector using the PEM files directly instead of a keystore. -->
+    <Connector port="8443" protocol="org.apache.coyote.http11.Http11NioProtocol"
+               maxThreads="150" SSLEnabled="true" scheme="https" secure="true">
+        <SSLHostConfig protocols="TLSv1.2+TLSv1.3">
+            <Certificate certificateFile="conf/localhost.crt"
+                         certificateKeyFile="conf/localhost.key"
+                         certificateChainFile="conf/signing-ca-chain.pem"
+                         type="RSA" />
+        </SSLHostConfig>
+    </Connector>
