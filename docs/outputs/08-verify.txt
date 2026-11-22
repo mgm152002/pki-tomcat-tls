@@ -1,0 +1,40 @@
+== 8.1 openssl s_client -showcerts (chain sent by Tomcat)
+---
+ 0 s:DC = org, DC = simple, O = Simple Inc, OU = Simple Web, CN = localhost
+   i:DC = org, DC = simple, O = Simple Inc, OU = Simple Signing CA, CN = Simple Signing CA
+ 1 s:DC = org, DC = simple, O = Simple Inc, OU = Simple Signing CA, CN = Simple Signing CA
+   i:DC = org, DC = simple, O = Simple Inc, OU = Simple Root CA, CN = Simple Root CA
+ 2 s:DC = org, DC = simple, O = Simple Inc, OU = Simple Root CA, CN = Simple Root CA
+   i:DC = org, DC = simple, O = Simple Inc, OU = Simple Root CA, CN = Simple Root CA
+---
+Server certificate
+---
+---
+Verification: OK
+---
+New, TLSv1.3, Cipher is TLS_AES_256_GCM_SHA384
+Verify return code: 0 (ok)
+---
+== 8.2 openssl verify of the certificate Tomcat served
+/tmp/served.crt: OK
+subject=DC = org, DC = simple, O = Simple Inc, OU = Simple Web, CN = localhost
+issuer=DC = org, DC = simple, O = Simple Inc, OU = Simple Signing CA, CN = Simple Signing CA
+serial=01
+== 8.3 curl trusting only the Root CA
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384 / X25519 / RSASSA-PSS
+*  subject: DC=org; DC=simple; O=Simple Inc; OU=Simple Web; CN=localhost
+*  expire date: Nov 21 20:30:51 2028 GMT
+*  subjectAltName: host "localhost" matched cert's "localhost"
+*  issuer: DC=org; DC=simple; O=Simple Inc; OU=Simple Signing CA; CN=Simple Signing CA
+*  SSL certificate verify ok.
+< HTTP/1.1 200 
+-- page title: <h1>Hello from Apache Tomcat over HTTPS</h1>
+== 8.4 curl via 127.0.0.1 (matches the IP SAN)
+HTTP 200, verify result 0
+== 8.5 curl WITHOUT our Root CA (should fail: unknown issuer)
+curl: (60) SSL certificate problem: self-signed certificate in certificate chain
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+how to fix it, please visit the web page mentioned above.

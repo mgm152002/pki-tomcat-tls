@@ -1,0 +1,6 @@
+Tomcat started.
+22-Nov-2026 20:31:22.960 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version name:   Apache Tomcat/10.1.62
+22-Nov-2026 20:31:23.320 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["https-jsse-nio-8443"]
+22-Nov-2026 20:31:23.494 INFO [main] org.apache.tomcat.util.net.AbstractEndpoint.logCertificate Connector [https-jsse-nio-8443], TLS virtual host [_default_], certificate type [RSA] configured from keystore [conf/localhost.p12] using alias [tomcat] with trust store [/etc/ssl/certs/java/cacerts]
+22-Nov-2026 20:31:23.988 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["https-jsse-nio-8443"]
+22-Nov-2026 20:31:23.990 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in [491] milliseconds

@@ -1,0 +1,77 @@
+== 5.1 Issue a second TLS certificate (revoked.simple.org)
+...+......+............+...+.........+...+.....+.+.........+...+..+.+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*...+......+...+.+..+.......+..+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*...+......+...........+......+..................+....+...........+............+...+......+...+..........+..+.+...+...........+......+.......+..+...+.+......+........+...+............+............+...+.+...........+......+...+..........+..+..........+.........+...+............+......+..+.......+.........+..............+...+.......+...+........+.+...+...........+....+........+............+......+................+...+..+........................+.+...+...+..+...+.............+..............+..........+..+......+...+.+......+..+...............+.............+.........+........+......+......+..................+...+............+.+..............+.+......+......+..+.......+.....+.+..+.......+...+........+.......+..+......+.......+..+.+..+.......+...+.....+.+..+...+....+...+........+.+...+......+......+...........+...+................+......+.....+...+......+.+...+......+.........+...............+..+...+.+..............+.......+.....+....+........+...+...+.+.....+.+........+.......+............+.....+.........................+..+...+......+.......+.....+..............................+...+......+......+....+.......................+.+..+...+.......+.........+.....+....+..+....+........+......+......+.............+...+..+.+..+....+...............+...+...............+.....+.+.....+.......+..+.......+......+.....+.......+...+...............+..+.......+.....+......+....+.........+..+...+...............+.+.........+.....+......+.+.....+...........................+.......+...........+...+.+........+...+...+.+.........+............+..+.+............+.........+...+..+.+...+.....+....+..+.+.........+...+........+............+...+....+...+..+...+......+..........+.....+......+...+.............+........+....+............+...........+...+.+.........+......+.....+...............+.+...+......+.....+.+..+...+.............+..+.........+..........+.....+...+.......+...+.....+..........+..+.+........+..........+............+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.................+.....+...+...+.......+.........+......+.................+.+......+......+..+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*..............+.......+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*.+....+...............+......+.........+.....+.+......+...+.....+......+.+.........+.........+.........+...+...............+...............+.......................+....+...+..+............+....+......+......+..+.+..+...+......+......+...+....+.................+...+...+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+-----
+Using configuration from etc/signing-ca.conf
+Check that the request matches the signature
+Signature ok
+Certificate Details:
+        Serial Number: 2 (0x2)
+        Validity
+            Not Before: Nov 22 20:30:53 2026 GMT
+            Not After : Nov 21 20:30:53 2028 GMT
+        Subject:
+            domainComponent           = org
+            domainComponent           = simple
+            organizationName          = Simple Inc
+            organizationalUnitName    = Simple Web
+            commonName                = revoked.simple.org
+        X509v3 extensions:
+            X509v3 Key Usage: critical
+                Digital Signature, Key Encipherment
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            X509v3 Extended Key Usage: 
+                TLS Web Server Authentication, TLS Web Client Authentication
+            X509v3 Subject Key Identifier: 
+                11:E9:A5:BA:7B:B3:DE:12:B2:FD:09:60:16:C5:75:A9:F7:81:89:2B
+            X509v3 Authority Key Identifier: 
+                F7:DC:CD:45:2F:FF:AA:BC:64:8F:4A:5E:AB:ED:A9:A5:95:19:34:81
+            X509v3 Subject Alternative Name: 
+                DNS:revoked.simple.org
+Certificate is to be certified until Nov 21 20:30:53 2028 GMT (730 days)
+
+Write out database with 1 new entries
+Database updated
+Issued revoked.simple.org with serial 02
+== 5.2 Revoke it (reason: superseded)
+Using configuration from etc/signing-ca.conf
+Revoking Certificate 02.
+Database updated
+== 5.3 Publish a new Signing CA CRL
+Using configuration from etc/signing-ca.conf
+Certificate Revocation List (CRL):
+        Version 2 (0x1)
+        Signature Algorithm: sha256WithRSAEncryption
+        Issuer: DC = org, DC = simple, O = Simple Inc, OU = Simple Signing CA, CN = Simple Signing CA
+        Last Update: Nov 22 20:30:54 2026 GMT
+        Next Update: Nov 29 20:30:54 2026 GMT
+        CRL extensions:
+            X509v3 Authority Key Identifier: 
+                F7:DC:CD:45:2F:FF:AA:BC:64:8F:4A:5E:AB:ED:A9:A5:95:19:34:81
+            X509v3 CRL Number: 
+                2
+Revoked Certificates:
+    Serial Number: 02
+        Revocation Date: Nov 22 20:30:54 2026 GMT
+        CRL entry extensions:
+            X509v3 CRL Reason Code: 
+                Superseded
+    Signature Algorithm: sha256WithRSAEncryption
+    Signature Value:
+        3e:ac:e8:4f:81:0d:d9:c8:40:30:07:42:0d:f3:55:d0:04:cd:
+        18:ce:65:5c:1f:9e:75:98:1e:13:dc:fc:a5:ea:86:6f:9f:58:
+        ec:43:49:6f:b8:95:7c:3c:67:dd:cc:d2:b8:18:fc:05:37:53:
+        82:fa:52:28:d3:fc:71:2e:6c:7d:45:90:49:51:ae:75:d2:55:
+        fc:94:fd:63:38:cc:22:bf:64:04:9c:8a:a8:74:6f:c2:21:fa:
+        f5:91:1a:50:71:75:7f:a1:08:db:a8:56:c6:91:3c:ec:7c:21:
+== 5.4 Signing CA database (V = valid, R = revoked)
+V	281121203051Z		01	unknown	/DC=org/DC=simple/O=Simple Inc/OU=Simple Web/CN=localhost
+R	281121203053Z	261122203054Z,superseded	02	unknown	/DC=org/DC=simple/O=Simple Inc/OU=Simple Web/CN=revoked.simple.org
+== 5.5 Verify with CRL checking
+-- localhost (should be OK):
+certs/localhost.crt: OK
+-- revoked.simple.org (should be revoked):
+DC = org, DC = simple, O = Simple Inc, OU = Simple Web, CN = revoked.simple.org
+error 23 at 0 depth lookup: certificate revoked
+error certs/revoked.simple.org.crt: verification failed

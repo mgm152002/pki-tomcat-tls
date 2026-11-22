@@ -1,0 +1,19 @@
+== 7.1 Copy keystore to $CATALINA_BASE/conf
+== 7.2 Insert HTTPS connector into server.xml
+connector added
+123:    <!-- HTTPS connector (PKI assignment)
+124-         TLS 1.2/1.3 on port 8443 using the server certificate issued by the Simple Signing CA.
+125-         The PKCS#12 keystore holds the private key, the server cert and the CA chain. -->
+126-    <Connector port="8443" protocol="org.apache.coyote.http11.Http11NioProtocol"
+127-               maxThreads="150" SSLEnabled="true" scheme="https" secure="true">
+128-        <SSLHostConfig protocols="TLSv1.2+TLSv1.3">
+129-            <Certificate certificateKeystoreFile="conf/localhost.p12"
+130-                         certificateKeystoreType="PKCS12"
+131-                         certificateKeystorePassword="changeit"
+132-                         certificateKeyAlias="tomcat"
+133-                         type="RSA" />
+134-        </SSLHostConfig>
+135-    </Connector>
+136-
+137-    <Engine name="Catalina" defaultHost="localhost">
+== 7.3 Install demo page as the ROOT web app
